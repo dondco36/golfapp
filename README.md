@@ -2,7 +2,7 @@
 Conor Dondale 12APR2021
 
 ## Project Overview
-This is app for goflers that would like to keep track of their statistics from each of their rounds.
+This is an app for goflers that would like to keep track of their statistics from each of their rounds.
 
 ### Features
 The Golf Stats App will allow the golfer to record certain stats from their golf rounds.
