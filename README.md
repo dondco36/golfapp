@@ -4,9 +4,21 @@ Conor Dondale 12APR2021
 ## Project Overview
 This is an app for goflers that would like to keep track of their statistics from each of their rounds.
 
-### Features
-The Golf Stats App will allow the golfer to record certain stats from their golf rounds.
-Those statistics include, but are not limited to:
+### Features  
+
+* Statistic of the Day
+* User Profile
+* Round/Statistic Search
+* Add Round Statistics with notes
+
+Additional Features:
+* GOAL Setting
+* Statistics Comparisons
+* Graphical Output
+* Create Group
+* Join Group
+
+Trackable statistics include, but are not limited to:    
 * Score (Hole-by-Hole and/or Total)
 * Fairway in Regulation (FIR)
 * Green in Regulation (GIR)
@@ -15,19 +27,74 @@ Those statistics include, but are not limited to:
 * Sand Saves
 * More statistics to come
 
-### User Experience
-The User should be able to login and enter the **Date** and **Course** from their round and then proceed to the stats part.
-The User can decide which stats to enter and which ones to omit.
-The User should have the option to get a **graphical printout** of their status as well as percentages of each.
-**Comparisons** will be given of where the Users percentages should be in accordance with their goals.
+### User Stories
+"As a User, I want to see my statistics on the landing page."    
 
-### Version 1
-The user should be able to input their statistics and see them on the Homepage when logged in.
-A search component will be in place to search for specific rounds or dates to view statistics from that round.
+"As a User, I want be able to login and enter the **Date** and **Course** to view individual round statistics."    
 
-### Version 2
-The User will be able to choose which statistics they wish to keep track of.
+"As a User, I want have the option to get a **Graphical Printout** of my stats as well as the percentages of each."    
 
-### Version 3
-The User will be able to see a **Graphical Representaion** of their statistics
-**Comparison Statistics** will be added as an option to for the User to compare against where they should be in accordance with their 
+"As a User, I want to be able to see **Comparisons** to see where my stats are compared to where my Goals are."    
+
+"As a User, I want to be able to enter different **GOALS** to work on and refer to while practicing."  
+
+### Functionality
+* User create account or login
+* Basic statistics on the homepage
+​
+* User Permissions:
+    - Search for their rounds
+    - Add statistics
+    - Highlight GOALS
+    - Post-Round notes
+    
+**Possible Features:**
+* User Created Groups
+    - Group Owner permissions:
+        - Manage rounds, comments, and images
+        - Manage moderators
+​
+    - Group Moderator permissions:
+        - Manage rounds, comments, and images
+
+### Models
+​
+* Rounds:
+    - Score (Hole-by-Hole and/or Total)
+    - Fairway in Regulation (FIR)
+    - Green in Regulation (GIR)
+    - Putts
+    - Up and Down
+    - Sand Saves
+    - More statistics to come
+​
+* User Profile:
+    - Name
+    - Image
+    - Favorite course
+    - Best Round
+    - Favorite Brand
+​
+**Additional Models:**
+* Groups:
+    - Name
+    - Owner
+    - Members
+
+
+### Versions in Order
+
+*Version 1*
+* Create Django APP with REST Framework, API.
+* Initial Database entry.
+* User Profiles.
+
+*Version 2*
+* Landing Page.
+* Login/Out Page.
+* User Profiles with Statistics layout.
+
+*Version 3*
+* GOALS can be added to keep track of.
+* The User will be able to see a **Graphical Representaion** of their statistics
+* **Comparison Statistics** will be added as an option to for the User to compare against where they should be in accordance with their 
