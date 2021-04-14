@@ -97,4 +97,11 @@ Trackable statistics include, but are not limited to:
 *Version 3*
 * GOALS can be added to keep track of.
 * The User will be able to see a **Graphical Representaion** of their statistics
-* **Comparison Statistics** will be added as an option to for the User to compare against where they should be in accordance with their 
+* **Comparison Statistics** will be added as an option to for the User to compare against where they should be in accordance with their
+
+*Version 4*
+* Groups for Users
+* Round and Statistic comparisons
+
+*Version 5*
+* Group competitions and MatchPlay Format tracker
