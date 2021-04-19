@@ -4,11 +4,11 @@ from GolfStatsApp import models
 class GolfStatsAppSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
-            'name',
+            'user',
             'course',
             'score',
             'greens',
             'fairways',
             'putts',
         )
-        model = models.User
+        model = models.Round

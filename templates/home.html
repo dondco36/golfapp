@@ -1,18 +1,91 @@
+{% csrf_token %}
+
 {% if user.is_authenticated %}
 <h1>Welcome {{ user.username }}!</h1>
 <p><a href="{% url 'logout' %}">Logout</a><p>
+
+<div id="app">
+    <div>
+        <div v-for="round in rounds" v-bind:key="round.id">
+            <h3>[[ round.course ]]</h3>
+            <p>Score: [[ round.score ]]</p>
+            <p>GIR: [[ round.greens ]]</p>
+            <p>FIR: [[ round.fairways ]]</p>
+            <p>Putts: [[ round.putts ]]</a></p>
+        </div>
+        <div>
+            <h2>Add a Round</h2>
+            <p>Course Name</p>
+            <input v-model="course">
+
+            <p>Score</p>
+            <input v-model="score">
+
+            <p>Greens in Regulation</p>
+            <input v-model="greens">
+
+            <p>Fairways in Regulation</p>
+            <input v-model="fairways">
+
+            <p>Putts</p>
+            <input v-model="putts">
+            <br>
+            <button @click="addRound">Add Round</button>
+        </div>
+    </div>
+</div>
+
 {% else %}
 <h1>Welcome, visitor!</h1>
 <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
 {% endif %}
-
-<div id="app">
-    <div>
-
-    </div>
-</div>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    // this is where the Vue app goes
+    let vm = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+            rounds: [],
+            course: '',
+            score: '',
+            greens: '',
+            fairways: '',
+            putts: ''
+        },
+        mounted: function () {
+            this.get_rounds();
+        },
+        methods: {
+        get_rounds: function () {
+                axios({
+                    method: 'get',
+                    url: 'api/v1/',
+                    }).then(response => {console.log(response);
+                    this.rounds = response.data.filter(round => round.user === {{ user.id }})
+                });
+            },
+
+        addRound: function () {
+                let csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+                axios({
+                    url: '/api/v1/',
+                    method: 'post',
+                    headers: {
+                        'X-CSRFToken': csrf_token
+                    },
+                    data: {
+                        user: {{ user.id }},
+                        course: this.course,
+                        score: this.score,
+                        greens: this.greens,
+                        fairways: this.fairways,
+                        putts: this.putts,
+                    }
+                    }).then(response => {
+                    this.get_rounds()
+                })
+            },
+        },
+    })
 </script>
