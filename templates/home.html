@@ -15,11 +15,18 @@
 
         <div id="app">
             <div>
+                <div>
+                    <h3>Below is your Running Averages</h3>
+                    <p>Average Score: [[ avg_score ]]</p>
+                    <p>Average GIRs: [[ avg_greens ]]% </p>
+                    <p>Average FIRs: [[ avg_fairways ]]% </p>
+                    <p>Average Putts: [[ avg_putts ]] </p>
+                </div>
                 <div v-for="round in rounds" v-bind:key="round.id">
                     <h3>[[ round.course ]] - Par [[ round.par ]]</h3>
                     <p>Score: [[ round.score ]]</p>
-                    <p>GIR: [[ round.greens ]] / 18 %[[ round.greens_percentage ]]</p>
-                    <p>FIR: [[ round.fairways_hit ]] / [[ round.total_fairways ]] %[[ round.fairways_percentage ]]</p>
+                    <p>GIR: [[ round.greens ]] / 18 - [[ round.greens_percentage ]]%</p>
+                    <p>FIR: [[ round.fairways_hit ]] / [[ round.total_fairways ]] - [[ round.fairways_percentage ]]%</p>
                     <p>Putts: [[ round.putts ]]</a></p>
                     <button @click="deleteRound(round)">Delete Round</button>
                 </div>
@@ -58,6 +65,9 @@
         <script src="https://unpkg.com/vue"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
+
+        </script>
+        <script>
             let vm = new Vue({
                 el: '#app',
                 delimiters: ['[[', ']]'],
@@ -69,55 +79,88 @@
                     greens: '',
                     total_fairways: '',
                     fairways_hit: '',
-                    putts: ''
+                    putts: '',
+                    avg_score: '',
+                    avg_GIR: '',
+                    avg_FIR: '',
+                    avg_putts: '',
                 },
                 mounted: function () {
+                    
                     this.getRounds();
                 },
                 methods: {
+                
+                // runningTotal: function () {
+                //     axios({
+                //         method: 'get',
+                //         url: 'api/v1/',
+                //     }).then(response => {
+                //         console.log(response)
+                //         // this.avg_score = 
+                //     })
+                // },
+
                 getRounds: function () {
-                        axios({
-                            method: 'get',
-                            url: 'api/v1/',
-                            }).then(response => {console.log(response);
-                            this.rounds = response.data.filter(round => round.user === {{ user.id }})
-                        });
+                    axios({
+                        method: 'get',
+                        url: 'api/v1/',
+                        }).then(response => {console.log(response);
+                        this.rounds = response.data.filter(round => round.user === {{ user.id }})
+                        let scoreArray=[]
+                        let greensArray=[]
+                        let fairwaysArray=[]
+                        let puttsArray=[]
+                        const arrAvg = arr => arr.reduce((a,b) => a + b, 0)/arr.length
+
+                        this.rounds.forEach(round => {
+                            scoreArray.push(round.score)
+                            greensArray.push(round.greens_percentage)
+                            fairwaysArray.push(round.fairways_percentage)
+                            puttsArray.push(round.putts)
+                        }),
+                        this.avg_score = arrAvg(scoreArray).toPrecision(3)
+                        this.avg_greens = arrAvg(greensArray).toPrecision(4)
+                        this.avg_fairways = arrAvg(fairwaysArray).toPrecision(4)
+                        this.avg_putts = arrAvg(puttsArray).toPrecision(3)
+                        
+                        })
                     },
 
                 addRound: function () {
-                        let csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value;
-                        axios({
-                            url: '/api/v1/',
-                            method: 'post',
-                            headers: {
-                                'X-CSRFToken': csrf_token
-                            },
-                            data: {
-                                user: {{ user.id }},
-                                course: this.course,
-                                par: this.par,
-                                score: this.score,
-                                greens: this.greens,
-                                total_fairways: this.total_fairways,
-                                fairways_hit: this.fairways_hit,
-                                putts: this.putts,
-                            }
-                            }).then(response => {
-                            this.getRounds()
-                        })
-                    },
-                deleteRound: function (round) {
-                        let csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value; 
-                        axios({
-                            url: '/api/v1/' + round.id,
-                            method: 'delete',
-                            headers: {
-                                'X-CSRFToken': csrf_token
-                            },
+                    let csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value;
+                    axios({
+                        url: '/api/v1/',
+                        method: 'post',
+                        headers: {
+                            'X-CSRFToken': csrf_token
+                        },
+                        data: {
+                            user: {{ user.id }},
+                            course: this.course,
+                            par: this.par,
+                            score: this.score,
+                            greens: this.greens,
+                            total_fairways: this.total_fairways,
+                            fairways_hit: this.fairways_hit,
+                            putts: this.putts,
+                        }
                         }).then(response => {
                         this.getRounds()
-                        })
-                    },
+                    })
+                },
+                deleteRound: function (round) {
+                    let csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value; 
+                    axios({
+                        url: '/api/v1/' + round.id,
+                        method: 'delete',
+                        headers: {
+                            'X-CSRFToken': csrf_token
+                        },
+                    }).then(response => {
+                    this.getRounds()
+                    })
+                },
                 },
             })
         </script>
