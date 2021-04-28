@@ -7,19 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Golf Stats App</title>
-    <link rel="shortcut icon" href="#">
-    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="{% static 'GolfStatsApp/style.css' %}" rel="stylesheet">
 </head>
 
-<body>
-    <header>
+<body class="container">
+    <header class="center">
         <div>
-            <h1>Golf Stats</h1>
+            <h2>Golf Stats</h2>
         </div>
         <div>
             {% if user.is_authenticated %}
-            <h2>Welcome {{ user.username }}!</h2>
+            <h3>Welcome, {{ user.username }}!</h3>
             <nav>
                 <a href="#rounds">Rounds</a>
                 <a href="#addround">Add Round</a>
@@ -30,19 +29,27 @@
     </header>
 
     <div id="app">
-        <div>
-            <div>
-                <h3>Averages across all rounds:</h3>
-                <p>Average Score: [[ avg_score ]]</p>
-                <p>Average GIRs: [[ avg_greens ]]% </p>
-                <p>Average FIRs: [[ avg_fairways ]]% </p>
-                <p>Average Putts: [[ avg_putts ]] </p>
-            </div>
+        <div class="card-panel grey lighten-5 z-depth-1" class="col s12">
+            <table class="col s12">
+                <caption><h4>Averages Across All Rounds</h4></caption>
+                <tr>
+                    <th>Avg Score</th>
+                    <th>Avg GIR</th>
+                    <th>Avg FIR</th>
+                    <th>Avg Putts</th>
+                </tr>
+                <tr>
+                    <td>[[ avg_score ]]</td>
+                    <td>[[ avg_greens ]]%</td>
+                    <td>[[ avg_fairways ]]%</td>
+                    <td>[[ avg_putts ]]</td>
+                </tr>
+            </table>
         </div>
-        <div id='rounds'>
-            <div>
-            <table id="addedRounds">
-                <caption><h3>Rounds Added</h3></caption>
+        <div class="col s12" id='rounds'>
+            <div class="card-panel grey lighten-5 z-depth-1">
+                <table>
+                <caption><h4>Rounds Added</h4></caption>
                 <tr>
                     <th>Course</th>
                     <th>Score</th>
@@ -54,24 +61,17 @@
                     <tr v-for="round in rounds" v-bind:key="round.id">
                         <td>[[ round.course ]] - Par [[ round.par ]]</td>
                         <td>[[ round.score ]]</td>
-                        <td>[[ round.greens ]] / 18 - [[ round.greens_percentage ]]%</td>
-                        <td>[[ round.fairways_hit ]] / [[ round.total_fairways ]] - [[ round.fairways_percentage ]]%
-                        </td>
+                        <td>[[ round.greens_percentage ]]%</td>
+                        <td>[[ round.fairways_percentage ]]%</td>
                         <td>[[ round.putts ]]</td>
                         <td><button @click="deleteRound(round)">Delete Round</button></td>
                     </tr>
-                    <!-- <h3>[[ round.course ]] - Par [[ round.par ]]</h3>
-                            <p>Score: [[ round.score ]]</p>
-                            <p>GIR: [[ round.greens ]] / 18 - [[ round.greens_percentage ]]%</p>
-                            <p>FIR: [[ round.fairways_hit ]] / [[ round.total_fairways ]] - [[ round.fairways_percentage ]]%</p>
-                            <p>Putts: [[ round.putts ]]</a></p>
-                            <button @click="deleteRound(round)">Delete Round</button> -->
                 </table>
             </div>
         </div>
-        <div id='addround'>
-            <div>
-                <h2>Add a Round</h2>
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="col s12" id='addround'>
+                <h4>Add a Round</h4>
                 <p>Course Name</p>
                 <input v-model="course">
 
@@ -99,20 +99,20 @@
     </div>
     <div>
         {% else %}
-        <h1>Welcome, visitor!</h1>
+        <h1>Welcome!</h1>
         <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a>
         </p>
         {% endif %}
     </div>
-    <footer>
-        <f3>Deezy Golf Co.&#174;</f3>
-    </footer>
+    <div class="card-panel grey lighten-5 z-depth-1">
+        <footer class="center">
+            <f3>Deezy Golf Co.&#174; </f3>
+        </footer>
+    </div>
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         let vm = new Vue({
             el: '#app',
@@ -208,8 +208,8 @@
                 this.getRounds()
             })
         },
-                },
-            })
+        },
+        })
     </script>
 </body>
 

@@ -8,137 +8,19 @@ body, html {
 }
 
 .bg {
-    background-color: green;
-}
-
-body {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: center;
-    padding-bottom: 12px;
-    /* border: solid 3px black; */
-}
-
-h1, h2, h3, h4, h5 {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-header, footer {
-    color: black;
-    text-align: center;
-    background-color: white;
-    border: solid 3px black;
+    background-color: #9CC1D9;
     margin: 6px;
-    padding: 6px;
 }
 
-#addedRounds {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-  
-#addedRounds td, #addedRounds th {
-    border: 1px solid black;
-    padding: 8px;
-}
-  
-#addedRounds tr:nth-child(even){
-    background-color: #f2f2f2;
-}
+/* header {
+    background-color: #03a9f4;
+} */
 
-#addedRounds tr:hover {
-    background-color: #ddd;
-}
-
-#addedRounds th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: green;
+nav {
+    background-color: #6B9C38;
     color: black;
 }
 
-header h1 {
-    margin: 0;
-}
-
-header nav a {
-    color: black;
-    text-align: center;
-}
-
-main h2 {
-    background-color: white;
-    border-style: solid;
-    text-align: center;
-    margin: 40px;
-}
-
-.gallery-view{
-    background-color: green;
-    padding: 4px;
-}
-
-main h3 {
-    text-decoration: underline;
-}
-
-main p {
-    text-align: justify;
-    max-width: 100%
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
-/* @media (min-width: 768px) {
-    header {
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
-    }
-
-    header h1 {
-        margin-top: 6px;
-    }
-
-    nav {
-        align-items: flex-end;
-    }
-
-    .gallery-view {
-        margin: 0 -6px;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .gallery-view div {
-        width: 48%;
-        padding: 6px;
-        margin-right: 1px;
-    }
-
-    main {
-        margin-left: 175px;
-        margin-right: 50px;
-        padding-right: 6px;
-    }
-}
-
-@media (min-width: 1024px) {
-    header {
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
-    }
-
-    header h1 {
-        margin-top: 6px;
-    }
-
-    nav {
-        align-items: flex-end;
-    }   
+/* button {
+    background-color: #0B64D9;
 } */
