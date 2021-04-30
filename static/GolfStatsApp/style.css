@@ -8,19 +8,19 @@ body, html {
 }
 
 .bg {
-    background-color: #9CC1D9;
-    margin: 6px;
+    background: url(images/background4.jpg) no-repeat center fixed;
+    background-size: cover;
 }
 
-/* header {
-    background-color: #03a9f4;
+/* nav {
+    background-color: #757575;
+    color: black;
 } */
 
-nav {
-    background-color: #6B9C38;
-    color: black;
-}
+/* a {
+    text-decoration: underline;
+} */
 
-/* button {
-    background-color: #0B64D9;
+/* footer {
+    position: fixed;
 } */
