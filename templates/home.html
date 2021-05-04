@@ -18,7 +18,7 @@
 
             <header class="col s12 m12 l3 push-l2">
                 <div>
-                    <div class="card-panel grey lighten-5 z-depth-2 center">
+                    <div class="card-panel blue-grey lighten-5 z-depth-2 center">
                         <div>
                             <h2>Golf Stats</h2>
                         </div>
@@ -27,23 +27,44 @@
                             <h3>Welcome, {{ user.username }}!</h3>
                             <br>
                             <div>
-                                <a class="waves-effect waves-light btn-large light-blue darken-1" href="#"><i class="material-icons left">home</i>Profile</a>
-                                <!-- <a class="waves-effect waves-light btn" href="#">Rounds</a> -->
-                                <!-- <a class="waves-effect waves-light btn" href="#">Add Round</a> -->
-                                <a class="waves-effect waves-light btn-large light-blue darken-1" href="{% url 'logout' %}"><i class="material-icons left">logout</i>Logout</a>
-                                <!-- <a href="#top">Return to Top</a> -->
+                                <a class="waves-effect waves-light btn-large light-blue darken-1 hoverable" href="#"><i class="material-icons left">home</i>Profile</a>
+                                <br>
+                                <br>
+                                <!-- <a class="waves-effect waves-light btn-large light-blue darken-1" href="#"><i class="material-icons left">golf_course</i>Rounds</a>
+                                <br>
+                                <br>
+                                <a class="waves-effect waves-light btn-large light-blue darken-1" href="#"><i class="material-icons left">add</i>Add</a>
+                                <br>
+                                <br> -->
+                                <a class="waves-effect waves-light btn-large light-blue darken-1 hoverable" href="{% url 'logout' %}"><i class="material-icons left">logout</i>Logout</a>
+                                <!-- <br>
+                                <br>
+                                <a href="#top">Return to Top</a> -->
+                                <br>
+                                <br>
+                                <p>The switch below turns on a Graphical view of your statistics. Give it a try!</p>
+                                <div class="switch">
+                                    <label>
+                                        No Graph
+                                        <input type="checkbox">
+                                        <span class="lever"></span>
+                                        Graph
+                                    </label>
+                                </div>
+                                <!-- <a class="waves-effect waves-light btn-large light-blue darken-1 hoverable" href="#">Table/Graph</a> -->
                             </div>
                         </div>
+                        <br>
                         <p>Presented by: Deezy Golf Co.&#174;</p>
                         <a href="http://materializecss.com">Materialize&#169;</a>
                     </div>
                 </div>
 
-                <div class="card-panel grey lighten-5 z-depth-2" id='addround'>
+                <div class="card-panel blue-grey lighten-5 z-depth-2" id='addround'>
                     <div>
                         <h4>Add a Round</h4>
                         <p>Click the button below to show/hide the Add Round input.</p>
-                        <button class="waves-effect waves-light btn-large light-blue darken-1" v-on:click="showAddRound = !showAddRound"><i class="material-icons">golf_course</i></button>
+                        <button class="waves-effect waves-light btn-large light-blue darken-1 hoverable" v-on:click="showAddRound = !showAddRound"><i class="material-icons">golf_course</i></button>
                         <div v-show="showAddRound">
                             <br>
                             <div class="input-field">
@@ -75,7 +96,7 @@
                                 <label for="totalPutts">Putts</label>  
                             </div>
                             <br>
-                            <button class="waves-effect waves-light btn-large light-blue darken-1" @click="addRound"><i class="material-icons">sports_golf</i>Add Round</button>
+                            <button class="waves-effect waves-light btn-large light-blue darken-1 hoverable" @click="addRound"><i class="material-icons">sports_golf</i>Add Round</button>
                         </div>
                     </div>
                 </div>
@@ -86,8 +107,8 @@
 
             <div>
                 <div  class="col s12 m12 l6 push-l2">
-                    <div class="card-panel grey lighten-5 z-depth-2">
-                        <table class="striped">
+                    <div class="card-panel blue-grey lighten-5 z-depth-2">
+                        <table class="bordered">
                             <caption><h4>Averages Across All Rounds</h4></caption>
                             <tr>
                                 <th>Avg Score</th>
@@ -106,8 +127,8 @@
                 </div>
                 
                 <div class="col s12 m12 l6 push-l2" id='rounds'>
-                    <div class="card-panel grey lighten-5 z-depth-2">
-                        <table class="striped">
+                    <div class="card-panel blue-grey lighten-5 z-depth-2">
+                        <table class="bordered">
                         <caption><h4>Rounds Added</h4></caption>
                         <tr class="center">
                             <th>Course</th>
@@ -128,16 +149,17 @@
                         </table>
                     </div>
                 </div>
+                
             </div>
     
             <div>
                 {% else %}
                 <br>
                 <div>
-                    <a class="waves-effect waves-light btn-large light-blue darken-1" href="{% url 'login' %}"><i class="material-icons left">golf_course</i>Login</a>
+                    <a class="waves-effect waves-light btn-large light-blue darken-1 hoverable" href="{% url 'login' %}"><i class="material-icons left">golf_course</i>Login</a>
                     <br>
                     <br>
-                    <a class="waves-effect waves-light btn-large light-blue darken-1" href="{% url 'users:signup' %}"><i class="material-icons left">create</i>Sign-Up</a>
+                    <a class="waves-effect waves-light btn-large light-blue darken-1 hoverable" href="{% url 'users:signup' %}"><i class="material-icons left">create</i>Sign-Up</a>
                 </div>
                 <div>
                     <br>
@@ -149,14 +171,7 @@
 
         </div>
     </div>
-    <!-- <div class="col s12">  
-        <div class="card-panel grey lighten-5 z-depth-2">
-            <footer class="center">
-                <f3>Deezy Golf Co.&#174; </f3>
-            </footer>
-        </div>
-    </div> -->
-    </div>
+
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

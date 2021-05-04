@@ -12,6 +12,10 @@ body, html {
     background-size: cover;
 }
 
+html {
+    font-family: Palatino, Trebuchet, serif;
+}
+
 /* nav {
     background-color: #757575;
     color: black;
