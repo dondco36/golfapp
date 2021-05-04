@@ -22,4 +22,4 @@ class Round(models.Model):
         return round((self.fairways_hit/self.total_fairways)*100, 2)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.user}'
