@@ -130,6 +130,7 @@
                     <div class="card-panel blue-grey lighten-5 z-depth-2">
                         <table class="bordered">
                         <caption><h4>Rounds Added</h4></caption>
+                        <p class="center">To delete rounds, you MUST be logged in on a desktop/laptop broswer.</p>
                         <tr class="center">
                             <th>Course</th>
                             <th>Score</th>
@@ -144,7 +145,7 @@
                                 <td>[[ round.greens_percentage ]]%</td>
                                 <td>[[ round.fairways_percentage ]]%</td>
                                 <td>[[ round.putts ]]</td>
-                                <td><button class="waves-effect waves-light red darken-1 btn-floating" @click="deleteRound(round)"><i class="material-icons left">delete</i></button></td>
+                                <td><button class="waves-effect waves-light red darken-1 btn-floating hide-on-med-and-down" @click="deleteRound(round)"><i class="material-icons left">delete</i></button></td>
                             </tr>
                         </table>
                     </div>
@@ -175,6 +176,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>src="https://cdn.jsdelivr.net/npm/package@version/file"</script>
     <script>
         let vm = new Vue({
             el: '#app',
@@ -199,6 +201,8 @@
                 this.getRounds();
             },
             methods: {
+                
+                // chart
 
                 getRounds: function () {
                     axios({
@@ -232,7 +236,6 @@
                 },
 
                 addRound: function () {
-                    console.log('Beefcake')
                     let csrf_token = document.querySelector("input[name=csrfmiddlewaretoken]").value;
                     axios({
                         url: '/api/v1/',
