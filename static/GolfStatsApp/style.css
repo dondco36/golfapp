@@ -31,6 +31,26 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
     box-shadow: 0 1px 0 0 #039be5;
 }
 
+.mod-scroll {
+    overflow: auto;
+    height: 1000px;
+    width: 50%;
+}
+
+.mod-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.mod-scroll::-webkit-scrollbar-track {
+    background: #039be5;
+    border-radius: 5px;
+}
+
+.mod-scroll::-webkit-scrollbar-thumb {
+    background: #81d4fa;
+    border-radius: 5px;
+}
+
 /* .blue {
     color: #039be5;
 } */
@@ -53,6 +73,11 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
         position: sticky;
         z-index: 1;
     } */
+
+    .graphSize {
+        height: 600px;
+        width: 100%;
+    }
 
     .scroll {
         overflow: auto;
