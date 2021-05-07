@@ -149,7 +149,7 @@
                         </div>
                         <div class="chart-container center graphSize scroll" v-show="showRoundCharts" style="position:relative">
                             <h4>Statistics Progression</h4>
-                            <p>Add/Remove data within the Legend to see Progression and Correlation. Course names will not be displayed.</p>
+                            <p>Add/Remove data within the Legend to see Progression and Correlation.</p>
                             <canvas id="statChart"></canvas>
                         </div>
                     </div>
@@ -182,6 +182,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        let statChart
+
         let vm = new Vue({
             el: '#app',
             delimiters: ['[[', ']]'],
@@ -211,7 +214,7 @@
             methods: {
                 
                 roundChart: function () {
-                    const labels = this.rounds.map(round=> round.id)
+                    const labels = this.rounds.map(round=> round.course)
                     const data = {
                         labels: labels,
                         datasets: [{
@@ -241,6 +244,14 @@
                         type: 'line',
                         data,
                         options: {
+                            scales: {
+                                x:{
+                                    display: false,
+                                    ticks: {
+                                        display: false
+                                    }
+                                }
+                            },
                             transitions: {
                                 show: {
                                     animations: {
@@ -255,7 +266,7 @@
                                 hide: {
                                     animations: {
                                         x: {
-                                        to: 0
+                                            to: 0
                                         },
                                         y: {
                                             to: 0
@@ -265,10 +276,11 @@
                             }
                         }
                     };
-                    const statChart = new Chart(
+                    statChart = new Chart(
                         document.getElementById("statChart"),
                         config
                     )
+                    // statChart.update()
                 },
 
                 getRounds: function () {
@@ -276,7 +288,6 @@
                         method: 'get',
                         url: 'api/v1/',
                     }).then(response => {
-                        console.log(response);
                         this.rounds = response.data.filter(round => round.user === {{ user.id }})
                         this.roundChart()
                     let scoreArray = []
@@ -329,6 +340,7 @@
                         this.total_fairways = ''
                         this.fairways_hit = ''
                         this.putts = ''
+                        statChart.destroy()
                         this.getRounds()
                     })
                 },
@@ -342,6 +354,7 @@
                             'X-CSRFToken': csrf_token
                         },
                     }).then(response => {
+                        statChart.destroy()
                         this.getRounds()
                     })
                 },
