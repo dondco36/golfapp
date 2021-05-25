@@ -5,6 +5,7 @@ from users.models import User
 
 class Round(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.CharField(max_length=15, null=True, blank=True)
     course = models.CharField(max_length=100)
     par = models.IntegerField()
     score = models.IntegerField()

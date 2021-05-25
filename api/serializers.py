@@ -6,6 +6,7 @@ class GolfStatsAppSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'user',
+            'date',
             'course',
             'par',
             'score',

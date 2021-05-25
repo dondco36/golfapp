@@ -18,7 +18,7 @@
     <div id="app">
         <div>
 
-            <header class="col s12 m12 l3 push-l2">
+            <header class="col s12 m12 l3 push-l1">
                 <div>
                     <div class="card-panel center z-depth-2">
                         <div>
@@ -54,14 +54,18 @@
                     </div>
                 </div>
 
-                <div class="card-panel z-depth-2" id='addround'>
+                <div class="card-panel z-depth-2 center" id='addround'>
                     <div>
                         <h4>Add a Round</h4>
                         <p>Click the button below input a round.</p>
-                        <button data-target="modal1" class="btn-large waves-effect waves-light light-blue darken-1 hoverable modal-trigger"><i class="material-icons">golf_course</i></button>
-                        <div id="modal1" class="modal blue-grey lighten-5 modal-fixed-footer">
-                            <div class="modal-content mod">
+                        <button data-target="modal1" class="btn-large waves-effect waves-light light-blue darken-1 hoverable modal-trigger"><i class="material-icons left">golf_course</i>Add Round</button>
+                        <div id="modal1" class="modal white modal-fixed-footer">
+                            <div class="modal-content mod scroll">
                                 <h4>Add a Round</h4>
+                                <div class="input-field">
+                                    <input id="date" type="text" class="validate" v-model="date">
+                                    <label style="color: #212121;" for="date">Date Played (mm/dd/yyyy)</label>  
+                                </div>
                                 <div class="input-field">
                                     <input id="course" type="text" class="validate" v-model="course">
                                     <label style="color: #212121;" for="course">Course Name</label>  
@@ -104,7 +108,7 @@
         <div>
 
             <div>
-                <div  class="col s12 m12 l5 push-l2">
+                <div  class="col s12 m12 l7 push-l1">
                     <div class="card-panel z-depth-2">
                         <table class="bordered">
                             <caption><h4>Averages Across All Rounds</h4></caption>
@@ -124,28 +128,36 @@
                     </div>
                 </div>
                 
-                <div class="col s12 m12 l5 push-l2 center" id='rounds'>
+                <div class="col s12 m12 l7 push-l1 center" id='rounds'>
                     <div class="card-panel z-depth-2">
                         <div v-show="!showRoundCharts" class="scroll">
                             <table class="bordered">
                             <h4>Rounds Added</h4>
                             <p>To delete rounds, you MUST be logged in on a desktop/laptop browser.</p>
-                            <tr class="center">
-                                <th>Course</th>
-                                <th>Score</th>
-                                <th>FIR</th>
-                                <th>GIR</th>
-                                <th>Putts</th>
-                                <th></th>
-                            </tr>
-                                <tr v-for="round in rounds" v-bind:key="round.id">
-                                    <td>[[ round.course ]] - Par [[ round.par ]]</td>
-                                    <td>[[ round.score ]]</td>
-                                    <td>[[ round.fairways_percentage ]]%</td>
-                                    <td>[[ round.greens_percentage ]]%</td>
-                                    <td>[[ round.putts ]]</td>
-                                    <td><button class="waves-effect waves-light red darken-1 btn-floating hide-on-med-and-down" @click="deleteRound(round)"><i class="material-icons left">delete</i></button></td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        {% comment %} <th>Date</th> {% endcomment %}
+                                        <th>Course</th>
+                                        <th>Date</th>
+                                        <th>Score</th>
+                                        <th>FIR</th>
+                                        <th>GIR</th>
+                                        <th>Putts</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="round in rounds" v-bind:key="round.id">
+                                        {% comment %} <td>[[ round.date ]] <td> {% endcomment %}
+                                        <td>[[ round.course ]] - Par [[ round.par ]]</td>
+                                        <td>[[ round.date ]]</td>
+                                        <td>[[ round.score ]]</td>
+                                        <td>[[ round.fairways_percentage ]]%</td>
+                                        <td>[[ round.greens_percentage ]]%</td>
+                                        <td>[[ round.putts ]]</td>
+                                        <td><button class="waves-effect waves-light red darken-1 btn-floating hoverable hide-on-med-and-down" @click="deleteRound(round)"><i class="material-icons left">delete</i></button></td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div class="chart-container center graphSize scroll" v-show="showRoundCharts" style="position:relative">
@@ -194,6 +206,7 @@
                 showAddRound: false,
                 showRoundCharts: false,
                 course: '',
+                date: '',
                 score: '',
                 par: '',
                 greens: '',
@@ -209,11 +222,11 @@
                 // JS for the Modal
                 var elems = document.querySelectorAll('.modal');
                 var instances = M.Modal.init(elems);
-                
+
                 this.getRounds();
             },
             methods: {
-                
+
                 roundChart: function () {
                     const labels = this.rounds.map(round=> round.course)
                     const data = {
@@ -331,6 +344,7 @@
                         data: {
                             user: {{ user.id }},
                             course: this.course,
+                            date: this.date,
                             par: this.par,
                             score: this.score,
                             greens: this.greens,
@@ -340,6 +354,7 @@
                         }
                     }).then(response => {
                         this.course = ''
+                        this.date = ''
                         this.par = ''
                         this.score = ''
                         this.greens = ''
